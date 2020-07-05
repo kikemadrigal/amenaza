@@ -1,0 +1,36 @@
+<msxdevtools app="spriteSX devtool" version="0.9.4.0">
+  <palette name="Default Palette" group="" version="" author="">
+    <color id="0" red="0" green="0" blue="0" />
+    <color id="1" red="0" green="0" blue="0" />
+    <color id="2" red="2" green="5" blue="2" />
+    <color id="3" red="3" green="6" blue="3" />
+    <color id="4" red="2" green="2" blue="5" />
+    <color id="5" red="3" green="3" blue="7" />
+    <color id="6" red="5" green="2" blue="1" />
+    <color id="7" red="2" green="6" blue="7" />
+    <color id="8" red="6" green="2" blue="2" />
+    <color id="9" red="7" green="3" blue="3" />
+    <color id="10" red="6" green="6" blue="3" />
+    <color id="11" red="6" green="6" blue="4" />
+    <color id="12" red="1" green="4" blue="1" />
+    <color id="13" red="5" green="3" blue="5" />
+    <color id="14" red="6" green="6" blue="6" />
+    <color id="15" red="7" green="7" blue="7" />
+  </palette>
+  <sprites name="virus-hiv" version="" group="" author="" startDate="637283808000000000" lastUpdate="637283808000000000" mode="2" type="2">
+    <description>
+    </description>
+    <item name="" order="0" type="2" mode="2" InkColor="15" BGcolor="0">
+      <gfxData>25,24,71,126,73,16,145,243,145,40,56,36,7,8,16,113,192,134,254,166,240,137,15,137,16,16,52,60,228,128,128,192</gfxData>
+      <colorData>10,10,8,8,8,8,8,8,8,8,8,8,8,10,10,10</colorData>
+    </item>
+    <item name="" order="1" type="2" mode="2" InkColor="15" BGcolor="0">
+      <gfxData>15,8,8,12,4,131,193,255,193,129,3,62,98,204,136,136,240,16,16,48,32,193,131,255,131,129,224,62,50,19,17,17</gfxData>
+      <colorData>8,8,8,8,8,8,5,5,5,5,5,3,3,3,3,3</colorData>
+    </item>
+    <item name="" order="2" type="2" mode="2" InkColor="15" BGcolor="0">
+      <gfxData>15,8,8,12,4,3,1,39,45,249,35,3,7,5,5,15,240,16,16,48,32,192,128,226,178,143,226,192,224,160,160,240</gfxData>
+      <colorData>8,8,8,8,8,8,5,5,5,5,5,3,3,3,3,3</colorData>
+    </item>
+  </sprites>
+</msxdevtools>

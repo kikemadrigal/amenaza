@@ -1,0 +1,132 @@
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2020.06.24 - 06:23:22]
+
+src/loader.asm
+Errors: 0
+
+       1   00:0000                              output "loader.bin"
+       2   00:9800                      
+       3   00:9800  FE                      db   #fe               ; ID archivo binario, siempre hay que poner el mismo 0FEh
+       4   00:9801  00 98                   dw   INICIO            ; dirección de inicio
+       5   00:9803  31 CB                   dw   FINAL - 1         ; dirección final
+       6   00:9805  00 98                   dw   INICIO            ; dircción del programa de ejecución (para cuando pongas r en bload"nombre_programa", r)
+       7   00:9807                      
+       8   00:9807                          org #9800   ; org se utiliza para decirle al z80 en que posición de memoria empieza nuestro programa (es la 33280 en decimal), en hezadecimal sería #8200
+       9   00:9800                      
+      10   00:9800  (00:005F)           CHGMOD equ #005F   ; Cambia el modo de screen pero previamente necesita que se le asigne el modo en el registro a
+      11   00:9800  (00:005C)           LDIRVM equ #005C   ;Tansfiere bloques de la RAM a la VRAM, es la más importante, necesita previamente asignar valor al registro bc con la longitud, dc con la dirección de inicio de la VRAM y hl con la dirección de inicio de la RAM:
+      12   00:9800  (00:00D5)           GTSTCK equ #00D5   ;si le pasas al registro a un 0 detectará los cursores,un 1 para el joystick 1 y 2 para el joystick 2
+      13   00:9800                                         ;devuelve en a 1 arriba, 2 diagonal arriba derecha,3 derecha, asi hasta 7
+      14   00:9800                      
+      15   00:9800                      INICIO:
+      16   00:9800  CD 2C 98                call inicializar_modo_pantalla
+      17   00:9803  CD 07 98                call cargar_tiles_colores_mapa ;cargamos la pantalla con la foto de presentación
+      18   00:9806                          ;call #009F
+      19   00:9806  C9                      ret
+      20   00:9807                      
+      21   00:9807                      
+      22   00:9807                      ;Es la pantalla con la foto
+      23   00:9807                      cargar_tiles_colores_mapa:
+      24   00:9807                      ;Para comprender como se distrivuye la memoria del VDP ir a: https://sites.google.com/site/multivac7/files-images/TMS9918_VRAMmap_G2_300dpi.png
+      25   00:9807                      ;-----------------------------Tileset -------------------------------------------
+      26   00:9807                          ;screen1 es el splash_screen o pantalla incial con la foto de presentación
+      27   00:9807  21 32 98                ld hl, tiles ; la rutina LDIRVM necesita haber cargado previamente la dirección de inicio de la RAM, para saber porqué he puesto 0000 fíjate este dibujo https://sites.google.com/site/multivac7/files-images/TMS9918_VRAMmap_G2_300dpi.png ,así es como está formado el VDP en screen 2
+      28   00:980A  11 00 00                ld de, #0000 ; la rutina necesita haber cargado previamente con de la dirección de inicio de la VRAM          
+      29   00:980D  01 00 18                ld bc, #1800; son los 3 bancos de #800
+      30   00:9810  CD 5C 00                call  LDIRVM ; Mira arriba, pone la explicación
+      31   00:9813                          ;call depack_VRAM   
+      32   00:9813                          ;call unpack 
+      33   00:9813                      ;--------------------------------Colores--------------------------------------
+      34   00:9813  21 32 B0                ld hl, color
+      35   00:9816  11 00 20                ld de, #2000 
+      36   00:9819  01 00 18                ld bc, #1800 ;son los 3 bancos de #800
+      37   00:981C  CD 5C 00                call  LDIRVM
+      38   00:981F                          ;call depack_VRAM
+      39   00:981F                          ;call unpack
+      40   00:981F                      ;------------------------------Mapa o tabla de nombres-------------------------------
+      41   00:981F  21 32 C8                ld hl, mapa
+      42   00:9822  11 00 18                ld de, #1800 
+      43   00:9825  01 00 03                ld bc, #300
+      44   00:9828  CD 5C 00                call  LDIRVM
+      45   00:982B                          ;call depack_VRAM
+      46   00:982B                          ;call unpack   
+      47   00:982B  C9                      ret
+      48   00:982C                      ;*************************Final de cargar_pantalla_screen1 la de la foto**********************
+      49   00:982C                      
+      50   00:982C                      inicializar_modo_pantalla:
+      51   00:982C                           ;Cambiamos el modo de pantalla
+      52   00:982C  3E 02                   ld  a,2     ; La rutina CHGMOD nos obliga a poner en el registro a el modo de pantalla que queremos 
+      53   00:982E  CD 5F 00                call CHGMOD ; Mira arriba, pone la explicación, pone screen 2 y sprite de 16 sin apliar
+      54   00:9831  C9                      ret
+      55   00:9832                      
+      56   00:9832                      
+      57   00:9832                      
+      58   00:9832                      ;************************************Final de inicializar_modo_pantalla********************
+      59   00:9832                      
+      60   00:9832                      ;Este include lleva la rutina de descompresion de los archivos a VRAM
+      61   00:9832                      ;Hay que meterle previamente en el reg. hl la dirección de la RAM y en DE la VRAM
+      62   00:9832                      ;depack_VRAM:
+      63   00:9832                      ;    include "src/PL_VRAM_Depack.asm"
+      64   00:9832                      
+      65   00:9832                      ;include "src/bios.asm"
+      66   00:9832                      
+      67   00:9832                      ;Este include lleva dentro la rutina depack para descomprimir archivos en ram
+      68   00:9832                      ;la rutina unpack necesita que le metas previamente en el reg. hl la dirección de lso datos que uieres descomprimir y en de la direccion de la RAM
+      69   00:9832                      ;include "src/unpack.asm"
+      70   00:9832                      
+      71   00:9832                      
+      72   00:9832                      
+      73   00:9832                      
+      74   00:9832                      ;Esta es la pantalla con la foto
+      75   00:9832                      tiles:
+      76   00:9832  (1800)                  incbin "./src/loader-tiles.bin.chr"
+      77   00:B032                      color:
+      78   00:B032  (1800)                  incbin "./src/loader-tiles.-color.bin.clr"
+      79   00:C832                      mapa: 
+      80   00:C832  (0300)                  incbin "./src/loader-map.bin"
+      81   00:CB32                      
+      82   00:CB32                      
+      83   00:CB32                      
+      84   00:CB32                      
+      85   00:CB32                      FINAL:
+      86   00:CB32                      
+      87   00:CB32                      
+      88   00:CB32                      
+      89   00:CB32                      
+      90   00:CB32                      
+      91   00:CB32                      
+      92   00:CB32                      
+      93   00:CB32                      
+      94   00:CB32                      
+      95   00:CB32                      
+      96   00:CB32                      
+
+    LABELS
+-------------------------------------------------
+00:0000005F   CHGMOD
+00:0000005C   LDIRVM
+00:000000D5 X GTSTCK
+00:00009800   INICIO
+00:00009807   cargar_tiles_colores_mapa
+00:0000982C   inicializar_modo_pantalla
+00:00009832   tiles
+00:0000B032   color
+00:0000C832   mapa
+00:0000CB32   FINAL
+
+
+ Output: src/loader.out
+-------------------------------------------------
+
+ Page: 00
+  Org: 00009800  Size: *  Used: 00000000
+
+    No output
+
+ Output: loader.bin
+-------------------------------------------------
+
+ Page: 00
+  Org: 00009800  Size: *  Used: 00003339
+
+   Address   Length Align   Label
+   00009800   13113         INICIO

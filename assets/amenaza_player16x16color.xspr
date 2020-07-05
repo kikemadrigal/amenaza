@@ -1,0 +1,32 @@
+<msxdevtools app="spriteSX devtool" version="0.9.4.0">
+  <palette name="Default Palette" group="" version="" author="">
+    <color id="0" red="0" green="0" blue="0" />
+    <color id="1" red="0" green="0" blue="0" />
+    <color id="2" red="2" green="5" blue="2" />
+    <color id="3" red="3" green="6" blue="3" />
+    <color id="4" red="2" green="2" blue="5" />
+    <color id="5" red="3" green="3" blue="7" />
+    <color id="6" red="5" green="2" blue="1" />
+    <color id="7" red="2" green="6" blue="7" />
+    <color id="8" red="6" green="2" blue="2" />
+    <color id="9" red="7" green="3" blue="3" />
+    <color id="10" red="6" green="6" blue="3" />
+    <color id="11" red="6" green="6" blue="4" />
+    <color id="12" red="1" green="4" blue="1" />
+    <color id="13" red="5" green="3" blue="5" />
+    <color id="14" red="6" green="6" blue="6" />
+    <color id="15" red="7" green="7" blue="7" />
+  </palette>
+  <sprites name="amenaza_player" version="" group="" author="" startDate="637282944000000000" lastUpdate="637282944000000000" mode="2" type="2">
+    <description>
+    </description>
+    <item name="" order="1" type="2" mode="2" InkColor="15" BGcolor="0">
+      <gfxData>148,150,147,146,146,242,2,7,4,4,6,2,2,2,3,2,144,80,62,138,126,16,16,240,32,32,144,80,80,136,228,60</gfxData>
+      <colorData>15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15</colorData>
+    </item>
+    <item name="" order="0" type="2" mode="2" InkColor="15" BGcolor="0">
+      <gfxData>1,7,4,8,12,4,4,4,7,0,241,151,148,148,148,148,252,4,124,240,248,248,240,124,132,252,32,224,144,144,144,144</gfxData>
+      <colorData>15,15,15,7,7,7,7,15,15,15,15,15,15,15,15,15</colorData>
+    </item>
+  </sprites>
+</msxdevtools>
