@@ -3,6 +3,6 @@
 
 # Enlace para probar el juego / link to try the game
 
-[http://msx.tipolisto.es/webmsx/standalone/?disk=files/amenaza.dsk](http://msx.tipolisto.es/webmsx/standalone/?disk=files/amenaza.dsk “amenaza”)
+http://msx.tipolisto.es/webmsx/standalone/?disk=files/amenaza.dsk
 
 thanks for reading me
